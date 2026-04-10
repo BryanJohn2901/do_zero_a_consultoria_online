@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do Zero à Consultoria Online - Padrão Elite</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#131313',        // Fundo principal escuro
+                            surface: '#1A1A1A',   // Fundo de cards/superfícies ligeiramente mais claro
+                            primary: '#D93E28',   // Vermelho/Laranja principal
+                            primaryHover: '#B33321', // Hover mais escuro
+                            primaryLight: '#FF5C45', // Gradiente claro
+                            textPrimary: '#FEFEFC', // Branco gelo (textos principais)
+                            textSecondary: '#A3A3A3', // Cinza médio (parágrafos)
+                            textMuted: '#666666', // Cinza escuro (apoio)
+                            border: 'rgba(254, 254, 252, 0.08)' // Bordas sutis com o branco gelo
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        title: ['Oswald', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'shimmer': 'shimmer 2.5s infinite linear',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        shimmer: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Títulos Oswald, Textos Inter - Global sem Itálico */
+        h1, h2, h3, h4, .font-title { font-family: 'Oswald', sans-serif; font-style: normal; }
+        p, span, li, a, button, input, label { font-family: 'Inter', sans-serif; font-style: normal; }
+
+        /* Efeito Glassmorphism Premium adaptado ao #131313 */
+        .glass-strong {
+            background: rgba(19, 19, 19, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(254, 254, 252, 0.08);
+        }
+        
+        /* Cursor Customizado apenas em Desktop */
+        @media (min-width: 1024px) {
+            body { cursor: none; }
+            a, button, input, select, textarea, .cursor-pointer { cursor: none !important; }
+        }
+
+        .custom-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 36px; height: 36px;
+            border: 2px solid rgba(217, 62, 40, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+            box-shadow: 0 0 15px rgba(217, 62, 40, 0.15);
+        }
+        .custom-cursor-dot {
+            position: fixed;
+            top: 0; left: 0;
+            width: 8px; height: 8px;
+            background-color: #D93E28;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(217, 62, 40, 0.8);
+        }
+        .custom-cursor.hover {
+            width: 54px; height: 54px;
+            background-color: rgba(217, 62, 40, 0.1);
+            border-color: rgba(217, 62, 40, 0.8);
+        }
+
+        /* Efeito de Glow Neon Premium */
+        .neon-glow {
+            box-shadow: 0 0 25px rgba(217, 62, 40, 0.3), 0 0 50px rgba(217, 62, 40, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-textPrimary font-sans antialiased selection:bg-brand-primary selection:text-brand-textPrimary">
+
+    <div class="custom-cursor hidden lg:block" id="cursor"></div>
+    <div class="custom-cursor-dot hidden lg:block" id="cursor-dot"></div>
+
+    <nav class="fixed top-6 left-0 right-0 z-50 px-4 md:px-0 hidden md:block" data-aos="fade-down" data-aos-duration="1200"> 
+        <div class="container mx-auto max-w-6xl"> 
+            <div class="relative flex items-center justify-between px-8 py-3 rounded-full glass-strong shadow-[0_8px_32px_0_rgba(0,0,0,0.6)] transition-all duration-300 hover:border-brand-primary/30 hover:shadow-[0_12px_40px_0_rgba(217,62,40,0.15)]"> 
+                
+                <a href="#" class="block hover:opacity-80 transition-opacity duration-300 flex items-center shrink-0"> 
+                    <img src="assets/logoPTA.svg" alt="Logo PTA" class="h-12">
+                </a> 
+    
+                <div class="hidden md:flex items-center gap-8"> 
+                    <a href="#problema" class="text-xs font-bold uppercase tracking-[0.1em] text-brand-textSecondary hover:text-brand-textPrimary transition-colors duration-300 relative group"> 
+                        O Problema 
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-full group-hover:left-0"></span> 
+                    </a> 
+                    <a href="#conteudo" class="text-xs font-bold uppercase tracking-[0.1em] text-brand-textSecondary hover:text-brand-textPrimary transition-colors duration-300 relative group"> 
+                        Conteúdo 
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-full group-hover:left-0"></span> 
+                    </a> 
+                    <a href="#para-quem" class="text-xs font-bold uppercase tracking-[0.1em] text-brand-textSecondary hover:text-brand-textPrimary transition-colors duration-300 relative group"> 
+                        Para Quem 
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-full group-hover:left-0"></span> 
+                    </a> 
+                    <a href="#entregaveis" class="text-xs font-bold uppercase tracking-[0.1em] text-brand-textSecondary hover:text-brand-textPrimary transition-colors duration-300 relative group"> 
+                        O Que Recebe 
+                        <span class="absolute -bottom-2 left-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-full group-hover:left-0"></span> 
+                    </a> 
+                </div> 
+    
+                <button onclick="abrirPopup()" class="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-brand-primary hover:bg-brand-primaryHover px-10 py-3.5 transition-all duration-300 shadow-[0_0_20px_rgba(217,62,40,0.3)] hover:shadow-[0_0_40px_rgba(217,62,40,0.5)] hover:-translate-y-0.5 cursor-pointer border-0 shrink-0"> 
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div> 
+                    <span class="relative text-xs font-bold uppercase tracking-[0.2em] text-brand-textPrimary"> 
+                        Inscreva-se 
+                    </span> 
+                </button> 
+            </div> 
+        </div> 
+    </nav>
+
+    <header class="relative min-h-screen flex items-center pt-32 pb-24 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="assets/hero_bg_1775843957963.png" alt="Personal Trainer Online" class="w-full h-full object-cover object-center scale-105">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-bg via-brand-bg/80 to-transparent"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-brand-primary/20 via-brand-bg/40 to-transparent"></div>
+        </div>
+        
+        <div class="absolute top-1/4 -left-48 w-96 h-96 bg-brand-primary/20 rounded-full blur-[150px] pointer-events-none z-0"></div>
+
+        <div class="container mx-auto px-6 relative z-10 max-w-7xl">
+            <div class="max-w-3xl text-left" data-aos="fade-right" data-aos-duration="1500">
+                <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-brand-primary/40 bg-brand-surface/60 text-brand-primary text-sm font-semibold uppercase tracking-[0.15em] backdrop-blur-sm mb-10 shadow-[0_0_15px_rgba(217,62,40,0.15)]">
+                    <span class="w-3 h-3 rounded-full bg-brand-primary animate-pulse"></span>
+                    Workshop Direto ao Ponto
+                </div>
+                
+                <h1 class="text-5xl md:text-8xl font-black uppercase leading-[1.0] text-brand-textPrimary font-title mb-8 tracking-tighter">
+                    DO ZERO À <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-primaryLight">CONSULTORIA<br> ONLINE</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-brand-textSecondary font-light leading-relaxed mb-12 max-w-2xl">
+                    Como estruturar, vender e fazer suas primeiras vendas com consultoria online <strong class="text-brand-textPrimary font-semibold">mesmo começando do zero.</strong> Sem enrolação, sem teoria desnecessária e sem complicação.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12">
+                    <button onclick="abrirPopup()" class="w-full sm:w-auto bg-brand-primary hover:bg-brand-primaryHover text-brand-textPrimary font-bold uppercase tracking-[0.1em] py-6 px-14 rounded-full transition-all duration-300 neon-glow hover:shadow-[0_15px_50px_rgba(217,62,40,0.5)] hover:-translate-y-1.5 flex items-center justify-center gap-3 text-lg group">
+                        Garanta Minha Vaga <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    
+                    <div class="flex items-center gap-3 text-brand-textMuted text-sm">
+                        <i class="fas fa-lock text-brand-textSecondary"></i> Ambiente Seguro
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl border-t border-brand-border pt-10">
+                    <div class="glass-strong p-6 rounded-3xl flex items-center gap-4 hover:border-brand-primary/30 transition-colors group">
+                        <i class="fas fa-calendar-alt text-brand-primary text-3xl group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <span class="text-xs text-brand-textMuted uppercase">Data</span>
+                            <p class="text-lg font-bold text-brand-textPrimary uppercase font-title">Sábado</p>
+                        </div>
+                    </div>
+                    <div class="glass-strong p-6 rounded-3xl flex items-center gap-4 hover:border-brand-primary/30 transition-colors group">
+                        <i class="fas fa-clock text-brand-primary text-3xl group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <span class="text-xs text-brand-textMuted uppercase">Horário</span>
+                            <p class="text-lg font-bold text-brand-textPrimary uppercase font-title">08h às 12h</p>
+                        </div>
+                    </div>
+                    <div class="glass-strong p-6 rounded-3xl flex items-center gap-4 hover:border-brand-primary/30 transition-colors group">
+                        <i class="fas fa-video text-brand-primary text-3xl group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <span class="text-xs text-brand-textMuted uppercase">Local</span>
+                            <p class="text-lg font-bold text-brand-textPrimary uppercase font-title">100% Online</p>
+                        </div>
+                    </div>
+                    <div class="glass-strong p-6 rounded-3xl flex items-center gap-4 hover:border-brand-primary/30 transition-colors group">
+                        <i class="fas fa-bolt text-brand-primary text-3xl group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <span class="text-xs text-brand-textMuted uppercase">Duração</span>
+                            <p class="text-lg font-bold text-brand-textPrimary uppercase font-title">4h de Prática</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </header>
+
+    <section id="problema" class="py-24 bg-brand-surface border-y border-brand-border relative overflow-hidden">
+        <div class="container mx-auto px-6 max-w-6xl relative z-10">
+            <div class="grid md:grid-cols-2 gap-20 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl md:text-5xl font-black uppercase leading-tight font-title text-brand-textPrimary mb-8 tracking-tighter">
+                        Você sente que está <span class="text-brand-primary">travado</span> no presencial?
+                    </h2>
+                    <img src="assets/problema_img_1775843989690.png" alt="Personal Trainer Exausto" class="w-full h-64 object-cover rounded-2xl mb-8 border border-brand-border/30 opacity-80 shadow-lg">
+                    <ul class="space-y-6 mb-10">
+                        <li class="flex items-center gap-5 text-brand-textSecondary text-xl bg-brand-bg p-6 rounded-2xl border border-brand-border group hover:border-brand-primary/30 transition-all hover:-translate-y-1">
+                            <i class="fas fa-times-circle text-brand-primary text-2xl group-hover:scale-110"></i> Trabalha muito
+                        </li>
+                        <li class="flex items-center gap-5 text-brand-textSecondary text-xl bg-brand-bg p-6 rounded-2xl border border-brand-border group hover:border-brand-primary/30 transition-all hover:-translate-y-1">
+                            <i class="fas fa-times-circle text-brand-primary text-2xl group-hover:scale-110"></i> Ganha pouco
+                        </li>
+                        <li class="flex items-center gap-5 text-brand-textSecondary text-xl bg-brand-bg p-6 rounded-2xl border border-brand-border group hover:border-brand-primary/30 transition-all hover:-translate-y-1">
+                            <i class="fas fa-times-circle text-brand-primary text-2xl group-hover:scale-110"></i> Depende de horário
+                        </li>
+                        <li class="flex items-center gap-5 text-brand-textSecondary text-xl bg-brand-bg p-6 rounded-2xl border border-brand-border group hover:border-brand-primary/30 transition-all hover:-translate-y-1">
+                            <i class="fas fa-times-circle text-brand-primary text-2xl group-hover:scale-110"></i> Não consegue escalar
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="glass-strong p-10 md:p-12 rounded-3xl relative" data-aos="fade-left">
+                    <div class="absolute -top-6 -left-6 w-16 h-16 bg-brand-primary text-brand-textPrimary rounded-full flex items-center justify-center text-3xl font-black rotate-[-10deg] neon-glow">!</div>
+                    <h3 class="text-3xl font-black uppercase text-brand-textPrimary font-title mb-6 leading-tight">Presta atenção nisso:</h3>
+                    <p class="text-brand-textSecondary text-lg leading-relaxed mb-8">
+                        O seu problema <strong class="text-brand-textPrimary">não é falta de conhecimento técnico.</strong> O problema é que você não sabe transformar isso em faturamento. Você não sabe:
+                    </p>
+                    <ul class="space-y-4 text-brand-textPrimary font-medium text-lg">
+                        <li class="flex items-start gap-4"><i class="fas fa-chevron-right text-brand-primary mt-1.5 text-sm"></i> Como montar uma consultoria online</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-chevron-right text-brand-primary mt-1.5 text-sm"></i> Como definir preço</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-chevron-right text-brand-primary mt-1.5 text-sm"></i> Como atrair alunos</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-chevron-right text-brand-primary mt-1.5 text-sm"></i> Como vender pelo Instagram e WhatsApp</li>
+                    </ul>
+                    <div class="mt-10 pt-8 border-t border-brand-border text-brand-primary font-black uppercase tracking-widest text-sm text-center">
+                        E É EXATAMENTE ISSO QUE VOCÊ VAI APRENDER AQUI.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="conteudo" class="py-24 bg-brand-bg relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 max-w-6xl relative z-10">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-4">Ementa Prática</h2>
+                <h3 class="text-4xl md:text-6xl font-black uppercase text-brand-textPrimary font-title leading-tight tracking-tighter">
+                    O que você vai <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-primaryLight">aprender</span>
+                </h3>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 items-start">
+                <div class="bg-brand-surface p-10 rounded-3xl border border-brand-border hover:border-brand-primary/40 transition-all duration-300 shadow-xl group hover:-translate-y-2" data-aos="fade-up" data-aos-delay="0">
+                    <img src="assets/conteudo_1_1775844005142.png" alt="Planejamento" class="w-full h-48 rounded-2xl object-cover mb-8 scale-100 group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    <div class="text-6xl font-black text-transparent stroke-brand-border opacity-30 group-hover:text-brand-primary/10 transition-colors mb-4 font-title" style="-webkit-text-stroke: 1px rgba(254, 254, 252, 0.2);">01</div>
+                    <h4 class="text-3xl font-black uppercase text-brand-textPrimary font-title mb-8 tracking-tight">Estrutura</h4>
+                    <ul class="space-y-5 text-brand-textSecondary text-base">
+                        <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> Como montar sua consultoria online do zero</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> Modelo simples e aplicável</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> Como estruturar sua entrega</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> Como definir preço e formato</li>
+                    </ul>
+                </div>
+
+                <div class="bg-brand-surface p-10 rounded-3xl border border-brand-border hover:border-brand-primary/40 transition-all duration-300 shadow-xl group relative transform md:-translate-y-8 hover:-translate-y-10" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute inset-0 bg-brand-primary/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative z-10">
+                        <img src="assets/conteudo_2_1775844020518.png" alt="Online" class="w-full h-48 rounded-2xl object-cover mb-8 scale-100 group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                        <div class="text-6xl font-black text-transparent stroke-brand-border opacity-30 group-hover:text-brand-primary/10 transition-colors mb-4 font-title" style="-webkit-text-stroke: 1px rgba(254, 254, 252, 0.2);">02</div>
+                        <h4 class="text-3xl font-black uppercase text-brand-textPrimary font-title mb-8 tracking-tight">Posicionamento</h4>
+                        <ul class="space-y-5 text-brand-textSecondary text-base">
+                            <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> Como atrair alunos todos os dias</li>
+                            <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> O que postar (reels e stories)</li>
+                            <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> Como gerar conversa com seguidores</li>
+                            <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> Como transformar conteúdo em demanda</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-brand-surface p-10 rounded-3xl border border-brand-border hover:border-brand-primary/40 transition-all duration-300 shadow-xl group hover:-translate-y-2" data-aos="fade-up" data-aos-delay="200">
+                    <img src="assets/conteudo_3_1775844035056.png" alt="Vendas" class="w-full h-48 rounded-2xl object-cover mb-8 scale-100 group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                    <div class="text-6xl font-black text-transparent stroke-brand-border opacity-30 group-hover:text-brand-primary/10 transition-colors mb-4 font-title" style="-webkit-text-stroke: 1px rgba(254, 254, 252, 0.2);">03</div>
+                    <h4 class="text-3xl font-black uppercase text-brand-textPrimary font-title mb-8 tracking-tight">Vendas</h4>
+                    <ul class="space-y-5 text-brand-textSecondary text-base">
+                        <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> Como fechar alunos pelo WhatsApp</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> Roteiros simples de conversa</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> Como conduzir o lead até a venda</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-check text-brand-primary mt-1.5 text-sm"></i> Como fazer suas primeiras vendas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-20 bg-brand-surface border border-brand-primary/30 p-8 rounded-3xl text-center max-w-3xl mx-auto neon-glow" data-aos="zoom-in">
+                <h4 class="text-2xl font-black text-brand-textPrimary uppercase mb-3 font-title tracking-wide">Encerramento</h4>
+                <p class="text-brand-textSecondary text-lg">Você sai com um <strong class="text-brand-textPrimary">plano claro pra aplicar imediatamente</strong> após as 4 horas de evento prático.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="para-quem" class="py-24 bg-brand-surface border-y border-brand-border">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="mb-16 relative rounded-3xl overflow-hidden h-64 md:h-80 shadow-[0_0_40px_rgba(217,62,40,0.1)] border border-brand-border/30" data-aos="fade-down">
+                <img src="assets/para_quem_1775844049314.png" alt="Profissionais de Educação Física" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-surface via-brand-surface/20 to-transparent"></div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-16">
+                
+                <div class="glass-strong p-10 rounded-3xl border-l-4 border-[#28a745]" data-aos="fade-right">
+                    <h3 class="text-3xl font-black uppercase text-brand-textPrimary font-title mb-8 flex items-center gap-4">
+                        <i class="fas fa-check-circle text-[#28a745] text-3xl"></i> Pra quem é
+                    </h3>
+                    <ul class="space-y-5 text-brand-textSecondary text-lg">
+                        <li class="flex items-start gap-4"><i class="fas fa-arrow-right text-[#28a745] mt-1.5 text-sm"></i> Personal trainer que quer aumentar faturamento</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-arrow-right text-[#28a745] mt-1.5 text-sm"></i> Quem quer parar de depender só do presencial</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-arrow-right text-[#28a745] mt-1.5 text-sm"></i> Quem quer começar no online</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-arrow-right text-[#28a745] mt-1.5 text-sm"></i> Quem não sabe como vender</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-arrow-right text-[#28a745] mt-1.5 text-sm"></i> Quem quer transformar conteúdo em cliente</li>
+                    </ul>
+                </div>
+
+                <div class="glass-strong p-10 rounded-3xl border-l-4 border-brand-primary" data-aos="fade-left">
+                    <h3 class="text-3xl font-black uppercase text-brand-textPrimary font-title mb-8 flex items-center gap-4">
+                        <i class="fas fa-times-circle text-brand-primary text-3xl"></i> Pra quem NÃO é
+                    </h3>
+                    <ul class="space-y-5 text-brand-textSecondary text-lg">
+                        <li class="flex items-start gap-4"><i class="fas fa-times text-brand-primary mt-1.5 text-sm"></i> Quem quer só consumir conteúdo e não aplicar</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-times text-brand-primary mt-1.5 text-sm"></i> Quem busca teoria sem prática</li>
+                        <li class="flex items-start gap-4"><i class="fas fa-times text-brand-primary mt-1.5 text-sm"></i> Quem não está disposto a testar e executar</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="entregaveis" class="py-24 bg-brand-bg relative overflow-hidden">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-brand-primary/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 max-w-5xl relative z-10 text-center">
+            
+            <h2 class="text-4xl md:text-6xl font-black uppercase text-brand-textPrimary font-title mb-16 tracking-tighter" data-aos="fade-up">O que você <span class="text-brand-primary">recebe</span></h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-20 text-left" data-aos="fade-up" data-aos-delay="100">
+                <div class="bg-brand-surface p-8 rounded-3xl border border-brand-border flex items-center gap-6 hover:border-brand-primary/50 transition-all hover:-translate-y-1">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-bg flex items-center justify-center text-brand-primary text-2xl shrink-0"><i class="fas fa-video"></i></div>
+                    <span class="text-brand-textPrimary font-medium text-lg">Acesso ao workshop completo ao vivo</span>
+                </div>
+                <div class="bg-brand-surface p-8 rounded-3xl border border-brand-border flex items-center gap-6 hover:border-brand-primary/50 transition-all hover:-translate-y-1">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-bg flex items-center justify-center text-brand-primary text-2xl shrink-0"><i class="fas fa-box-open"></i></div>
+                    <span class="text-brand-textPrimary font-medium text-lg">Estrutura pronta de consultoria online</span>
+                </div>
+                <div class="bg-brand-surface p-8 rounded-3xl border border-brand-border flex items-center gap-6 hover:border-brand-primary/50 transition-all hover:-translate-y-1">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-bg flex items-center justify-center text-brand-primary text-2xl shrink-0"><i class="fas fa-comments-dollar"></i></div>
+                    <span class="text-brand-textPrimary font-medium text-lg">Roteiros simples de venda e fechamento</span>
+                </div>
+                <div class="bg-brand-surface p-8 rounded-3xl border border-brand-border flex items-center gap-6 hover:border-brand-primary/50 transition-all hover:-translate-y-1">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-bg flex items-center justify-center text-brand-primary text-2xl shrink-0"><i class="fas fa-mobile-alt"></i></div>
+                    <span class="text-brand-textPrimary font-medium text-lg">Direcionamento claro de conteúdo</span>
+                </div>
+                <div class="bg-brand-primary/10 p-8 rounded-3xl border border-brand-primary/40 flex items-center gap-6 sm:col-span-2 justify-center shadow-[0_0_30px_rgba(217,62,40,0.1)] neon-glow">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-primary flex items-center justify-center text-brand-textPrimary text-3xl shrink-0"><i class="fas fa-rocket"></i></div>
+                    <span class="text-brand-textPrimary font-bold text-xl">Plano de ação pra começar imediatamente</span>
+                </div>
+            </div>
+
+            <div class="glass-strong p-12 md:p-16 rounded-3xl mb-16 relative overflow-hidden" data-aos="zoom-in">
+                <img src="assets/entregaveis_img_1775844064724.png" alt="Sucesso Online" class="absolute inset-0 w-full h-full object-cover object-center opacity-20 grayscale hover:opacity-30 transition-opacity">
+                <div class="relative z-10">
+                    <h3 class="text-3xl md:text-4xl font-black uppercase text-brand-textPrimary font-title mb-8 leading-tight">Deixa eu ser direto com você</h3>
+                    <p class="text-brand-textSecondary text-xl mb-8 font-light">Você pode continuar postando sem resultado, dependendo só do presencial e vendo outros crescerem no online...</p>
+                    <p class="text-brand-textPrimary text-2xl font-semibold mb-10 leading-snug">Ou pode aprender o caminho certo e começar a construir uma nova fonte de renda.</p>
+                    <div class="text-brand-primary font-black uppercase tracking-[0.25em] mb-12 text-sm">A decisão é sua.</div>
+                    
+                    <button onclick="abrirPopup()" class="w-full sm:w-auto bg-brand-primary hover:bg-brand-primaryHover text-brand-textPrimary font-bold uppercase tracking-[0.1em] py-6 px-16 rounded-full transition-all duration-300 neon-glow hover:shadow-[0_15px_50px_rgba(217,62,40,0.6)] hover:-translate-y-1 inline-flex items-center justify-center gap-3 text-lg animate-[pulse_2s_infinite]">
+                        Garanta Sua Vaga Agora <i class="fas fa-check-circle group-hover:scale-110 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-surface border-t border-brand-border pt-20 pb-28 relative z-20"> 
+        <div class="container mx-auto px-6 max-w-7xl"> 
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-16"> 
+                <div class="lg:col-span-4 space-y-5"> 
+                    <a href="#" class="inline-block hover:opacity-80 transition-opacity duration-300 mb-4"> 
+                        <img src="assets/logoPTA.svg" alt="Logo PTA" class="h-12">
+                    </a> 
+                    <p class="text-brand-textMuted text-sm leading-relaxed max-w-sm"> O método definitivo para Personal Trainers que desejam escalar seus ganhos através do online com um posicionamento de alto valor. </p> 
+                    <div class="flex items-center gap-4 text-brand-textMuted text-xl pt-4">
+                        <a href="#" class="hover:text-brand-primary transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-brand-primary transition-colors"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-brand-primary transition-colors"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div> 
+                <div class="lg:col-span-2 lg:col-start-7"> 
+                    <h4 class="text-brand-textSecondary font-bold uppercase tracking-widest text-xs mb-8 font-sans">Navegação</h4> 
+                    <ul class="space-y-4 text-sm text-brand-textMuted font-sans"> 
+                        <li><a href="#problema" class="hover:text-brand-primary transition-colors duration-200">O Problema</a></li> 
+                        <li><a href="#conteudo" class="hover:text-brand-primary transition-colors duration-200">Conteúdo</a></li> 
+                        <li><a href="#para-quem" class="hover:text-brand-primary transition-colors duration-200">Para Quem</a></li> 
+                        <li><a href="#entregaveis" class="hover:text-brand-primary transition-colors duration-200">O Que Recebe</a></li> 
+                    </ul> 
+                </div> 
+                <div class="lg:col-span-2"> 
+                    <h4 class="text-brand-textSecondary font-bold uppercase tracking-widest text-xs mb-8 font-sans">Legal</h4> 
+                    <ul class="space-y-4 text-sm text-brand-textMuted font-sans"> 
+                        <li><a href="#" class="hover:text-brand-primary transition-colors duration-200">Termos de Uso</a></li> 
+                        <li><a href="#" class="hover:text-brand-primary transition-colors duration-200">Política de Privacidade</a></li> 
+                        <li><a href="#" class="hover:text-brand-primary transition-colors duration-200">Aviso Legal</a></li> 
+                    </ul> 
+                </div> 
+                <div class="lg:col-span-2"> 
+                    <h4 class="text-brand-textSecondary font-bold uppercase tracking-widest text-xs mb-8 font-sans">Suporte</h4> 
+                    <ul class="space-y-4 text-sm text-brand-textMuted font-sans"> 
+                        <li><a href="#" class="hover:text-brand-textPrimary flex items-center gap-2 transition-colors"><i class="fab fa-whatsapp text-[#28a745]"></i> Suporte ao Aluno</a></li> 
+                        <li><a href="mailto:contato@consultoria.online" class="hover:text-brand-textPrimary transition-colors flex items-center gap-2"><i class="fas fa-envelope text-brand-primary"></i> contato@consultoria.online</a></li> 
+                    </ul> 
+                </div> 
+            </div> 
+            <div class="border-t border-brand-border pt-10 flex flex-col md:flex-row justify-between items-center gap-6"> 
+                <p class="text-brand-textMuted text-xs font-sans"> &copy; 2026 Consultoria Online. Todos os direitos reservados. </p> 
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-textMuted font-sans"> 
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#28a745] animate-pulse"></span> Ambiente Seguro 
+                </div> 
+            </div> 
+        </div> 
+    </footer>
+
+    <div id="popup-captura" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-brand-bg/95 backdrop-blur-2xl" aria-hidden="true">
+        
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-primary/25 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="relative bg-brand-surface border border-brand-border rounded-3xl shadow-[0_0_80px_rgba(217,62,40,0.15)] max-w-md w-full p-10 md:p-12 animate-[fadeIn_0.3s_ease-out]">
+            <button type="button" onclick="fecharPopup()" class="absolute top-6 right-6 w-11 h-11 rounded-full bg-brand-bg border border-brand-border hover:bg-brand-primary hover:text-brand-textPrimary hover:border-brand-primary flex items-center justify-center text-brand-textSecondary transition-all duration-300" aria-label="Fechar">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            
+            <div class="text-center mb-10">
+                <div class="text-brand-primary text-[11px] font-black uppercase tracking-[0.25em] mb-3 font-sans">Quase Lá</div>
+                <h3 class="font-black text-3xl text-brand-textPrimary uppercase tracking-tight mb-3 font-title">Garanta sua Vaga</h3>
+                <p class="text-base text-brand-textSecondary font-light">Preencha os dados abaixo para acessar o evento.</p>
+            </div>
+            
+            <form id="form-consultoria-premium" class="space-y-5 mt-8 popup-form">
+                <div>
+                    <label for="lead-nome" class="block text-sm font-medium text-brand-textSecondary mb-1.5 font-sans">Nome</label>
+                    <input type="text" id="lead-nome" name="nome" required placeholder="Seu nome completo" class="w-full px-5 py-4 rounded-xl bg-brand-bg border border-brand-border text-brand-textPrimary placeholder-brand-textMuted focus:border-brand-primary focus:ring-1 focus:ring-brand-primary outline-none transition font-sans">
+                </div>
+                <div>
+                    <label for="lead-email" class="block text-sm font-medium text-brand-textSecondary mb-1.5 font-sans">Email</label>
+                    <input type="email" id="lead-email" name="email" required placeholder="seu@email.com" class="w-full px-5 py-4 rounded-xl bg-brand-bg border border-brand-border text-brand-textPrimary placeholder-brand-textMuted focus:border-brand-primary focus:ring-1 focus:ring-brand-primary outline-none transition font-sans">
+                </div>
+                <div>
+                    <label for="lead-phone" class="block text-sm font-medium text-brand-textSecondary mb-1.5 font-sans">Telefone</label>
+                    <div class="flex rounded-xl overflow-hidden border border-brand-border focus-within:border-brand-primary focus-within:ring-1 focus-within:ring-brand-primary bg-brand-bg">
+                        <span class="inline-flex items-center px-5 py-4 bg-brand-primary text-brand-textPrimary font-bold select-none shrink-0 font-sans text-base">+55</span>
+                        <input type="tel" id="lead-phone" name="phone" required placeholder="(11) 99999-9999" maxlength="15" autocomplete="tel" class="flex-1 px-5 py-4 bg-transparent text-brand-textPrimary placeholder-brand-textMuted outline-none min-w-0 mask-telefone font-sans">
+                    </div>
+                    <p class="error-msg text-brand-primary text-xs mt-1.5 hidden font-sans">Informe o DDD e o número completo.</p>
+                </div>
+                <button type="submit" class="w-full bg-brand-primary text-brand-textPrimary font-sans font-bold py-5 rounded-xl uppercase tracking-widest hover:shadow-[0_0_20px_rgba(217,62,40,0.6)] transition btn-submit mt-3 text-base">
+                    Avançar para Pagamento <i class="fas fa-check-circle ml-2"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // 1. Inicializa AOS
+        AOS.init({ once: true, offset: 50, duration: 1000 });
+
+        // 2. Custom Cursor Hover
+        if (window.innerWidth >= 1024) {
+            const cursor = document.getElementById('cursor');
+            const cursorDot = document.getElementById('cursor-dot');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+                setTimeout(() => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                }, 40);
+            });
+
+            document.querySelectorAll('a, button, input, textarea, .cursor-pointer, .popup-form label').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+        }
+
+        // 3. Controle do Popup
+        const popup = document.getElementById('popup-captura');
+        function abrirPopup() {
+            popup.classList.remove('hidden');
+            popup.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => document.getElementById('lead-nome').focus(), 300);
+        }
+        function fecharPopup() {
+            popup.classList.add('hidden');
+            popup.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) fecharPopup();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') fecharPopup();
+        });
+
+        // 4. Máscara de Telefone
+        const telInput = document.getElementById('lead-phone');
+        telInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, ''); 
+            if (value.startsWith('55') && value.length > 2) value = value.slice(2); 
+            value = value.slice(0, 11); 
+
+            let formatado = value;
+            if (value.length > 2) {
+                formatado = `(${value.slice(0, 2)}) ` + value.slice(2);
+            }
+            if (value.length > 7) {
+                formatado = formatado.slice(0, 10) + '-' + formatado.slice(10);
+            }
+            e.target.value = formatado;
+            
+            const errorMsg = document.querySelector('.error-msg');
+            if (errorMsg) errorMsg.classList.add('hidden');
+        });
+
+        // 5. Integração Webhook + UTMs + Fallback Rigoroso
+        function obterUTMs() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                utm_source: params.get('utm_source') || '',
+                utm_medium: params.get('utm_medium') || '',
+                utm_campaign: params.get('utm_campaign') || '',
+                utm_term: params.get('utm_term') || '',
+                utm_content: params.get('utm_content') || ''
+            };
+        }
+
+        const form = document.getElementById('form-consultoria-premium');
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btnSubmit = this.querySelector('.btn-submit');
+            const errorMsg = this.querySelector('.error-msg');
+            
+            const rawPhone = telInput.value.replace(/\D/g, '');
+            if (rawPhone.length < 10) {
+                errorMsg.classList.remove('hidden');
+                telInput.focus();
+                return;
+            }
+
+            // UI State Loading
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processando...';
+
+            const nome = document.getElementById('lead-nome').value.trim();
+            const email = document.getElementById('lead-email').value.trim();
+            const telefoneFormatado = '+55' + rawPhone;
+            const urlAtual = window.location.href.split('?')[0]; 
+            const utms = obterUTMs();
+
+            const payload = {
+                nome: nome,
+                email: email,
+                telefone: telefoneFormatado,
+                utm_source: utms.utm_source,
+                utm_medium: utms.utm_medium,
+                utm_campaign: utms.utm_campaign,
+                utm_term: utms.utm_term,
+                utm_content: utms.utm_content,
+                url: urlAtual,
+                produto: "DO ZERO À CONSULTORIA ONLINE" 
+            };
+
+            const WEBHOOK_URL = 'https://hook.us1.make.com/4n42ngpte48fu0mvpnh5ewi4vu3ddah4';
+            
+            const BASE_REDIRECT_URL = urlAtual;
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) { console.error("Webhook recusado."); }
+            } catch (error) {
+                console.error("Erro ao enviar dados para o webhook:", error);
+            } finally {
+                const queryString = `?sucesso=true&name=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(telefoneFormatado)}&utm_source=${encodeURIComponent(utms.utm_source)}&utm_term=${encodeURIComponent(utms.utm_term)}&utm_campaign=${encodeURIComponent(utms.utm_campaign)}&utm_medium=${encodeURIComponent(utms.utm_medium)}&utm_content=${encodeURIComponent(utms.utm_content)}`;
+                
+                window.location.href = BASE_REDIRECT_URL + queryString;
+            }
+        });
+        
+        // Exibe alert caso venha do redirect de sucesso
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            if(params.get('sucesso') === 'true') {
+                alert("Obrigado pela sua inscrição no Workshop! Você será contatado em breve para finalizar sua participação.");
+            }
+        }
+    </script>
+</body>
+</html>
