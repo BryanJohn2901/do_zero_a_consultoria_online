@@ -197,7 +197,7 @@
                     Workshop Direto ao Ponto
                 </div>
                 
-                <h1 class="text-5xl md:text-8xl font-black uppercase leading-[1.0] text-brand-textPrimary font-title mb-6 md:mb-8 tracking-tighter">
+                <h1 class="text-5xl md:text-8xl font-black uppercase leading-none text-brand-textPrimary font-title mb-6 md:mb-8 tracking-tighter">
                     DO ZERO À <br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-primaryLight">CONSULTORIA<br> ONLINE</span>
                 </h1>
@@ -212,8 +212,11 @@
                     </button>
                 </div>
                 <div class="mb-12">
-                    <p class="text-brand-textSecondary text-sm uppercase tracking-[0.2em] mb-2">Investimento</p>
-                    <p class="text-4xl md:text-5xl font-black text-brand-primary font-title">R$ 9,90</p>
+                    <div class="inline-flex flex-col items-center md:items-start rounded-3xl border-2 border-brand-primary/60 bg-brand-primary/10 px-7 py-5 shadow-[0_0_35px_rgba(217,62,40,0.2)]">
+                        <p class="text-brand-textSecondary text-sm uppercase tracking-[0.2em] mb-2 text-center md:text-left">Investimento</p>
+                        <p class="text-5xl md:text-6xl font-black text-brand-primary font-title leading-none drop-shadow-[0_0_18px_rgba(217,62,40,0.35)] text-center md:text-left">R$ 9,90</p>
+                        <p class="mt-2 text-brand-textPrimary text-xs md:text-sm font-semibold uppercase tracking-[0.12em] text-center md:text-left">Acesso imediato</p>
+                    </div>
                 </div>
     
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl border-t border-brand-border pt-10 mx-auto md:mx-0 text-left">
@@ -221,7 +224,7 @@
                         <i class="fas fa-calendar-alt text-brand-primary text-2xl"></i>
                         <div>
                             <span class="text-[10px] text-brand-textMuted uppercase block">Data</span>
-                            <p class="text-sm font-bold text-brand-textPrimary uppercase font-title">Sábado</p>
+                            <p class="text-sm font-bold text-brand-textPrimary uppercase font-title">Sábado, dia 25</p>
                         </div>
                     </div>
                     <div class="glass-strong p-4 rounded-3xl flex items-center gap-3">
@@ -386,6 +389,49 @@
         </div>
     </section>
 
+    <section id="professores" class="py-24 bg-brand-bg relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[420px] bg-brand-primary/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 max-w-5xl relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-4">Seus Professores</h2>
+                <h2 class="text-4xl md:text-6xl font-black uppercase text-brand-textPrimary font-title tracking-tighter">
+                    Aprenda com quem <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-primaryLight">faz acontecer</span>
+                </h2>
+            </div>
+
+            <div class="space-y-8">
+                <div class="glass-strong rounded-3xl overflow-hidden border border-brand-border hover:border-brand-primary/40 transition-all duration-300 hover:-translate-y-1" data-aos="fade-up" data-aos-delay="0">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 items-center">
+                        <div class="bg-brand-surface/70 h-full min-h-[360px] md:min-h-[440px]">
+                            <img src="assets/rafael.webp" alt="Rafael Tonietto" class="w-full h-full object-cover object-center">
+                        </div>
+                        <div class="p-8 md:p-10">
+                            <p class="text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-3">Estratégia e Vendas</p>
+                            <h3 class="text-3xl md:text-4xl font-black uppercase text-brand-textPrimary font-title mb-5">Rafael Tonietto</h3>
+                            <p class="text-brand-textSecondary text-lg leading-relaxed mb-5">A mente tática por trás de faturamentos explosivos. Ele constrói o mapa das campanhas de vendas para garantir picos de caixa previsíveis.</p>
+                            <p class="text-brand-textPrimary text-lg leading-relaxed font-medium">Transforma a sua audiência em clientes de alto ticket com estratégias sólidas de lançamento.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-strong rounded-3xl overflow-hidden border border-brand-border hover:border-brand-primary/40 transition-all duration-300 hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 items-center">
+                        <div class="p-8 md:p-10 order-2 lg:order-1">
+                            <p class="text-brand-primary text-xs font-bold uppercase tracking-[0.2em] mb-3">Empreendedor e Visionário</p>
+                            <h3 class="text-3xl md:text-4xl font-black uppercase text-brand-textPrimary font-title mb-5">Artur Monteiro</h3>
+                            <p class="text-brand-textSecondary text-lg leading-relaxed mb-5">Empreendedor e empresário de infoprodutos, autor do livro Ephygital - Ecossistema Físico e Digital.</p>
+                            <p class="text-brand-textPrimary text-lg leading-relaxed font-medium">Idealizador do Business Club, um mastermind exclusivo para empresários.</p>
+                        </div>
+                        <div class="bg-brand-surface/70 h-full min-h-[360px] md:min-h-[440px] order-1 lg:order-2">
+                            <img src="assets/arthur.webp" alt="Artur Monteiro" class="w-full h-full object-cover object-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="entregaveis" class="py-24 bg-brand-bg relative overflow-hidden">
         <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-brand-primary/10 rounded-full blur-[150px] pointer-events-none"></div>
 
@@ -423,14 +469,17 @@
                     <p class="text-brand-textSecondary text-xl mb-8 font-light">Você pode continuar postando sem resultado, dependendo só do presencial e vendo outros crescerem no online...</p>
                     <p class="text-brand-textPrimary text-2xl font-semibold mb-10 leading-snug">Ou pode aprender o caminho certo e começar a construir uma nova fonte de renda.</p>
                     <div class="text-brand-primary font-black uppercase tracking-[0.25em] mb-12 text-sm">A decisão é sua.</div>
-                    <div class="mb-10">
-                        <p class="text-brand-textSecondary text-sm uppercase tracking-[0.2em] mb-2">Investimento</p>
-                        <p class="text-4xl md:text-5xl font-black text-brand-primary font-title">R$ 9,90</p>
+                    <div class="flex flex-col items-center">
+                        <div class="mb-8 inline-flex flex-col items-center rounded-3xl border-2 border-brand-primary/60 bg-brand-primary/10 px-8 py-6 shadow-[0_0_40px_rgba(217,62,40,0.18)]">
+                            <p class="text-brand-textSecondary text-sm uppercase tracking-[0.2em] mb-3 text-center">Investimento</p>
+                            <p class="text-5xl md:text-7xl font-black text-brand-primary font-title leading-none drop-shadow-[0_0_18px_rgba(217,62,40,0.35)] text-center">R$ 9,90</p>
+                            <p class="mt-3 text-brand-textPrimary text-sm md:text-base font-semibold uppercase tracking-[0.12em] text-center">Acesso imediato</p>
+                        </div>
+                        
+                        <button onclick="abrirPopup()" class="w-full sm:w-auto bg-brand-primary hover:bg-brand-primaryHover text-brand-textPrimary font-bold uppercase tracking-[0.1em] py-6 px-16 rounded-full transition-all duration-300 neon-glow hover:shadow-[0_15px_50px_rgba(217,62,40,0.6)] hover:-translate-y-1 inline-flex items-center justify-center gap-3 text-lg animate-[pulse_2s_infinite]">
+                            Garanta Sua Vaga Agora <i class="fas fa-check-circle group-hover:scale-110 transition-transform"></i>
+                        </button>
                     </div>
-                    
-                    <button onclick="abrirPopup()" class="w-full sm:w-auto bg-brand-primary hover:bg-brand-primaryHover text-brand-textPrimary font-bold uppercase tracking-[0.1em] py-6 px-16 rounded-full transition-all duration-300 neon-glow hover:shadow-[0_15px_50px_rgba(217,62,40,0.6)] hover:-translate-y-1 inline-flex items-center justify-center gap-3 text-lg animate-[pulse_2s_infinite]">
-                        Garanta Sua Vaga Agora <i class="fas fa-check-circle group-hover:scale-110 transition-transform"></i>
-                    </button>
                 </div>
             </div>
         </div>
@@ -551,44 +600,53 @@
         // 3. Controle do Popup
         const popup = document.getElementById('popup-captura');
         function abrirPopup() {
+            if (!popup) return;
             popup.classList.remove('hidden');
             popup.classList.add('flex');
             document.body.style.overflow = 'hidden';
-            setTimeout(() => document.getElementById('lead-nome').focus(), 300);
+            setTimeout(() => {
+                const nome = document.getElementById('lead-nome');
+                if (nome) nome.focus();
+            }, 300);
         }
         function fecharPopup() {
+            if (!popup) return;
             popup.classList.add('hidden');
             popup.classList.remove('flex');
             document.body.style.overflow = '';
         }
-        popup.addEventListener('click', (e) => {
-            if (e.target === popup) fecharPopup();
-        });
+        if (popup) {
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) fecharPopup();
+            });
+        }
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') fecharPopup();
         });
 
         // 4. Máscara de Telefone
         const telInput = document.getElementById('lead-phone');
-        telInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, ''); 
-            if (value.startsWith('55') && value.length > 2) value = value.slice(2); 
-            value = value.slice(0, 11); 
+        if (telInput) {
+            telInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.startsWith('55') && value.length > 2) value = value.slice(2);
+                value = value.slice(0, 11);
 
-            let formatado = value;
-            if (value.length > 2) {
-                formatado = `(${value.slice(0, 2)}) ` + value.slice(2);
-            }
-            if (value.length > 7) {
-                formatado = formatado.slice(0, 10) + '-' + formatado.slice(10);
-            }
-            e.target.value = formatado;
-            
-            const errorMsg = document.querySelector('.error-msg');
-            if (errorMsg) errorMsg.classList.add('hidden');
-        });
+                let formatado = value;
+                if (value.length > 2) {
+                    formatado = `(${value.slice(0, 2)}) ` + value.slice(2);
+                }
+                if (value.length > 7) {
+                    formatado = formatado.slice(0, 10) + '-' + formatado.slice(10);
+                }
+                e.target.value = formatado;
 
-        // 5. Integração Webhook + UTMs + Fallback Rigoroso
+                const errorMsg = document.querySelector('.error-msg');
+                if (errorMsg) errorMsg.classList.add('hidden');
+            });
+        }
+
+        // 5. Integração Webhook + UTMs + Redirect checkout
         function obterUTMs() {
             const params = new URLSearchParams(window.location.search);
             return {
@@ -600,62 +658,161 @@
             };
         }
 
-        const form = document.getElementById('form-consultoria-premium');
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const btnSubmit = this.querySelector('.btn-submit');
-            const errorMsg = this.querySelector('.error-msg');
-            
-            const rawPhone = telInput.value.replace(/\D/g, '');
-            if (rawPhone.length < 10) {
-                errorMsg.classList.remove('hidden');
-                telInput.focus();
-                return;
+        function payloadParaFormData(payload) {
+            const params = new URLSearchParams();
+            Object.keys(payload).forEach(function (key) {
+                params.append(key, String(payload[key] != null ? payload[key] : ''));
+            });
+            return params;
+        }
+
+        function enviarWebhookIframeForm(actionUrl, payload) {
+            return new Promise(function (resolve) {
+                var frameName = 'wh_' + Date.now();
+                var iframe = document.createElement('iframe');
+                iframe.name = frameName;
+                iframe.setAttribute('title', 'webhook');
+                iframe.style.cssText = 'position:absolute;width:0;height:0;border:0;left:-9999px';
+                document.body.appendChild(iframe);
+
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = actionUrl;
+                form.target = frameName;
+                form.setAttribute('accept-charset', 'UTF-8');
+                Object.keys(payload).forEach(function (key) {
+                    var inp = document.createElement('input');
+                    inp.type = 'hidden';
+                    inp.name = key;
+                    inp.value = String(payload[key] != null ? payload[key] : '');
+                    form.appendChild(inp);
+                });
+                document.body.appendChild(form);
+                form.submit();
+
+                setTimeout(function () {
+                    try {
+                        form.remove();
+                    } catch (e1) {}
+                    try {
+                        iframe.remove();
+                    } catch (e2) {}
+                    resolve();
+                }, 600);
+            });
+        }
+
+        async function enviarWebhookMake(url, payload) {
+            var payloadCompleto = Object.assign({}, payload, {
+                json: JSON.stringify(payload)
+            });
+
+            var params = payloadParaFormData(payloadCompleto);
+            try {
+                var r1 = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+                    body: params.toString(),
+                    mode: 'cors',
+                    credentials: 'omit',
+                    cache: 'no-store',
+                    keepalive: true
+                });
+                if (r1.ok) return true;
+            } catch (err1) {
+                console.warn('Webhook POST form:', err1);
             }
-
-            // UI State Loading
-            btnSubmit.disabled = true;
-            btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processando...';
-
-            const nome = document.getElementById('lead-nome').value.trim();
-            const email = document.getElementById('lead-email').value.trim();
-            const telefoneFormatado = '+55' + rawPhone;
-            const urlAtual = window.location.href.split('?')[0]; 
-            const utms = obterUTMs();
-
-            const payload = {
-                nome: nome,
-                email: email,
-                telefone: telefoneFormatado,
-                utm_source: utms.utm_source,
-                utm_medium: utms.utm_medium,
-                utm_campaign: utms.utm_campaign,
-                utm_term: utms.utm_term,
-                utm_content: utms.utm_content,
-                url: urlAtual,
-                produto: "DO ZERO À CONSULTORIA ONLINE" 
-            };
-
-            const WEBHOOK_URL = 'https://hook.us1.make.com/4n42ngpte48fu0mvpnh5ewi4vu3ddah4';
-            
-            const BASE_REDIRECT_URL = urlAtual;
 
             try {
-                const response = await fetch(WEBHOOK_URL, {
+                var r2 = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+                    body: JSON.stringify(payload),
+                    mode: 'cors',
+                    credentials: 'omit',
+                    keepalive: true
+                });
+                if (r2.ok) return true;
+            } catch (err2) {
+                console.warn('Webhook POST text:', err2);
+            }
+
+            try {
+                var r3 = await fetch(url, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(payload),
+                    mode: 'cors',
+                    credentials: 'omit',
+                    keepalive: true
                 });
-                if (!response.ok) { console.error("Webhook recusado."); }
-            } catch (error) {
-                console.error("Erro ao enviar dados para o webhook:", error);
-            } finally {
-                const queryString = `?sucesso=true&name=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(telefoneFormatado)}&utm_source=${encodeURIComponent(utms.utm_source)}&utm_term=${encodeURIComponent(utms.utm_term)}&utm_campaign=${encodeURIComponent(utms.utm_campaign)}&utm_medium=${encodeURIComponent(utms.utm_medium)}&utm_content=${encodeURIComponent(utms.utm_content)}`;
-                
-                window.location.href = BASE_REDIRECT_URL + queryString;
+                if (r3.ok) return true;
+            } catch (err3) {
+                console.warn('Webhook POST json:', err3);
             }
-        });
+
+            await enviarWebhookIframeForm(url, payloadCompleto);
+            return true;
+        }
+
+        const WEBHOOK_URL = 'https://hook.us1.make.com/bj1q14346ezeybpcqjb9ctea89aoatvn?produto=W-CO';
+        const BASE_REDIRECT_URL = 'https://chk.eduzz.com/6W4GZKZO0Z';
+
+        const formCaptura = document.getElementById('form-consultoria-premium');
+        if (formCaptura) {
+            formCaptura.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const btnSubmit = this.querySelector('.btn-submit');
+                const errorMsg = this.querySelector('.error-msg');
+                const phoneEl = document.getElementById('lead-phone');
+                const rawPhone = (phoneEl && phoneEl.value ? phoneEl.value : '').replace(/\D/g, '');
+
+                if (rawPhone.length < 10) {
+                    if (errorMsg) errorMsg.classList.remove('hidden');
+                    if (phoneEl) phoneEl.focus();
+                    return;
+                }
+
+                if (btnSubmit) {
+                    btnSubmit.disabled = true;
+                    btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processando...';
+                }
+
+                const nome = document.getElementById('lead-nome');
+                const email = document.getElementById('lead-email');
+                const nomeVal = nome ? nome.value.trim() : '';
+                const emailVal = email ? email.value.trim() : '';
+                const telefoneFormatado = '+55' + rawPhone;
+                const urlAtual = window.location.href.split('?')[0];
+                const utms = obterUTMs();
+
+                const payload = {
+                    nome: nomeVal,
+                    email: emailVal,
+                    telefone: telefoneFormatado,
+                    utm_source: utms.utm_source,
+                    utm_medium: utms.utm_medium,
+                    utm_campaign: utms.utm_campaign,
+                    utm_term: utms.utm_term,
+                    utm_content: utms.utm_content,
+                    url: urlAtual,
+                    produto: 'DO ZERO À CONSULTORIA ONLINE',
+                    produto_codigo: 'W-CO'
+                };
+
+                await enviarWebhookMake(WEBHOOK_URL, payload);
+
+                const redirectUrl = new URL(BASE_REDIRECT_URL);
+                if (utms.utm_source) redirectUrl.searchParams.set('utm_source', utms.utm_source);
+                if (utms.utm_medium) redirectUrl.searchParams.set('utm_medium', utms.utm_medium);
+                if (utms.utm_campaign) redirectUrl.searchParams.set('utm_campaign', utms.utm_campaign);
+                if (utms.utm_term) redirectUrl.searchParams.set('utm_term', utms.utm_term);
+                if (utms.utm_content) redirectUrl.searchParams.set('utm_content', utms.utm_content);
+
+                window.location.href = redirectUrl.toString();
+            });
+        }
         
         // Exibe alert caso venha do redirect de sucesso
         window.onload = function() {
